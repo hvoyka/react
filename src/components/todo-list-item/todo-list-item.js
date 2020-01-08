@@ -5,23 +5,35 @@ export default class TodoListItem extends Component {
 
   constructor(){
     super();
+    this.state = {
+      done: false
+    };
 
     this.onLabelClick = () => {
-      console.log(`Done: ${this.props.label}`);
+      this.setState({
+        done: true
+      });
     }
+    
   }
 
   render (){
     const { label, important = false } = this.props;
+    const {done} = this.state;
+
+    let className = 'todo-list-item';
+    if(done) {
+      className += ' done';
+    }
     const style = {
       color: important ? 'steelblue' : 'black',
       fontWeight: important ? 'bold' : 'normal'
     };
   
     return (
-      <span className="todo-list-item">
+      <span className={className}>
         <span
-          className="todo-list-item-label"
+          className='todo-list-item-label'
           style={style}
           onClick={this.onLabelClick}>
           {label}
